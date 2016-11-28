@@ -25,6 +25,9 @@ namespace GroceryApi.Controllers
                     case "yes":
                         return Request.CreateResponse(HttpStatusCode.OK,
                             entities.Groceries.Where(e => e.Done.ToLower() == "yes").ToList());
+                    case "no":
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                            entities.Groceries.Where(e => e.Done.ToLower() == "no").ToList());
                     default:
                         return Request.CreateResponse(HttpStatusCode.BadRequest);
                 }

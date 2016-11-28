@@ -11,21 +11,7 @@ using WebApiContrib.Formatting.Jsonp;
 
 namespace GroceryApi
 {
-    /*
-    public class CustomJsonFormatter : JsonMediaTypeFormatter
-    {
-        public CustomJsonFormatter()
-        {
-            this.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
-        }
 
-        public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
-        {
-            base.SetDefaultContentHeaders(type, headers, mediaType);
-            headers.ContentType = new MediaTypeHeaderValue("application/json");
-        }
-    }
-    */
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -45,7 +31,8 @@ namespace GroceryApi
             );
 
 
-
+            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
+            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }
